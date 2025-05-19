@@ -1,0 +1,34 @@
+[default]
+; Note: ansible_host *MUST* be an IPv4 address or setting things like DNS
+; servers will break.
+dc01 ansible_host={{ip_range}}.30 dns_domain=dc04 dict_key=dc01 ansible_user=administrator@kanto.pokemon.local ansible_password=8dCT-DJjgScp
+srv01 ansible_host={{ip_range}}.91 dns_domain=dc03 dict_key=srv01 ansible_user=administrator@sinnoh.pokemon.local ansible_password=eqZ#c$KR2TkZpZ
+dc02 ansible_host={{ip_range}}.60 dns_domain=dc04 dict_key=dc02 ansible_user=administrator@hoenn.pokemon.local ansible_password=NgkPP5$Zpu&f2s
+dc03 ansible_host={{ip_range}}.90 dns_domain=dc04 dict_key=dc03 ansible_user=administrator@sinnoh.pokemon.local ansible_password=eqZ#c$KR2TkZpZ
+dc04 ansible_host={{ip_range}}.120 dns_domain=dc04 dict_key=dc04 ansible_user=administrator@pokemon.local ansible_password=JmGQxK70HqC5%*
+
+[all:vars]
+; domain_name : folder inside ad/
+domain_name=POKE
+
+;use to setup a dns server in the start of provisioning
+force_dns_server=no
+dns_server=1.1.1.1
+
+; winrm connection (windows)
+ansible_winrm_transport=basic
+ansible_user=vagrant
+ansible_password=vagrant
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore
+ansible_winrm_operation_timeout_sec=400
+ansible_winrm_read_timeout_sec=500
+
+
+; LAB SCENARIO CONFIGURATION -----------------------------
+[domain]
+dc01
+srv01
+dc02
+dc03
+dc04

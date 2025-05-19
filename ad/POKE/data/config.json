@@ -1,0 +1,445 @@
+{
+  "lab": {
+    "hosts": {
+      "dc01": {
+        "hostname": "mew",
+        "type": "dc",
+        "local_admin_password": "8dCT-DJjgScp",
+        "domain": "kanto.pokemon.local",
+        "path": "DC=kanto,DC=pokemon,DC=local",
+        "local_groups": {
+          "Administrators": [
+            "kanto\\misty",
+            "kanto\\gary"
+          ]
+        },
+        "scripts": [
+          "features.ps1"
+        ],
+        "vulns": [
+          "disable_firewall",
+          "directory",
+          "openshares",
+          "files",
+          "permissions",
+          "shares",
+          "enable_llmnr",
+          "enable_nbt-ns"
+        ],
+        "vulns_vars": {
+          "directory": {
+            "shares": "C:\\shares\\",
+            "all": "c:\\shares\\all\\",
+            "public": "c:\\shares\\public\\"
+          },
+          "files": {
+            "pallettownfile": {
+              "src": "pallet-town.txt",
+              "dest": "C:\\shares\\all\\pallet-town.txt"
+            },
+            "flag": {
+              "src": "kantoFLAG.txt",
+              "dest": "C:\\Users\\Administrator\\"
+            }
+          }
+        }
+      },
+      "srv01": {
+        "hostname": "Dialga",
+        "type": "server",
+        "local_admin_password": "eqZ#c$KR2TkZpZ",
+        "domain": "sinnoh.pokemon.local",
+        "path": "DC=sinnoh,DC=pokemon,DC=local",
+        "use_laps": true,
+        "local_groups": {
+          "Administrators": [
+            "hoenn\\steven",
+            "sinnoh\\cynthia"
+          ],
+          "Remote Desktop Users": [
+            "sinnoh\\gymleaders",
+            "hoenn\\steven"
+          ]
+        },
+        "vulns": [
+          "files",
+          "shares",
+          "disable_firewall"
+        ],
+        "scripts": [
+          "localAdmin.ps1"
+        ]
+      },
+      "dc02": {
+        "hostname": "Kyogre",
+        "type": "dc",
+        "local_admin_password": "NgkPP5$Zpu&f2s",
+        "domain": "hoenn.pokemon.local",
+        "path": "DC=hoenn,DC=pokemon,DC=local",
+        "local_groups": {
+          "Administrators": [
+            "hoenn\\steven",
+            "hoenn\\Maxie",
+            "hoenn\\Archie"
+          ],
+          "Remote Desktop Users": [
+            "kanto\\ViridianForest"
+          ]
+        },
+        "scripts": [
+          "asreproasting.ps1"
+        ],
+        "vulns": [
+          "disable_firewall",
+          "files",
+          "shares",
+          "directory",
+          "permissions"
+        ],
+        "vulns_vars": {
+          "directory": {
+            "shares": "C:\\Shares",
+            "Wally": "C:\\Shares\\Wally"
+          },
+          "files": {
+            "WallyCredentials": {
+              "src": "Ralts.txt",
+              "dest": "C:\\Shares\\Wally\\"
+            },
+            "flag": {
+              "src": "hoennFLAG.txt",
+              "dest": "C:\\Users\\Administrator\\"
+            }
+          },
+          "permissions": {
+            "ViridianForestWallyShare": {
+              "path": "C:\\Shares\\Wally",
+              "user": "kanto\\ViridianForest",
+              "rights": "Read"
+            }
+          },
+          "shares" : {
+            "Wally": {
+              "path"   : "C:\\Shares\\Wally\\",
+              "list"   : "yes",
+              "full"   : "hoenn\\wally",
+              "change" : "kanto\\ViridianForest",
+              "read"   : "kanto\\ViridianForest",
+              "deny"   : "kanto\\ash" 
+            }
+          }
+        }
+      },
+      "dc03": {
+        "hostname": "Arceus",
+        "type": "dc",
+        "local_admin_password": "eqZ#c$KR2TkZpZ",
+        "domain": "sinnoh.pokemon.local",
+        "path": "DC=sinnoh,DC=pokemon,DC=local",
+        "local_groups": {
+          "Administrators": [
+            "sinnoh\\cynthia"
+          ],
+          "Remote Desktop Users": [
+            "sinnoh\\cynthia"
+          ]
+        },
+        "vulns": [
+          "files",
+          "shares",
+          "disable_firewall",
+          "openshares"
+         ],
+        "scripts": [],
+        "vulns_vars": {
+          "files": {
+            "flag": {
+              "src": "sinnohFLAG.txt",
+              "dest": "C:\\Users\\Administrator\\"
+            }
+          }
+        },
+        "shares" : {
+          "CHAMPION": {
+            "path"   : "C:\\",
+            "list"   : "yes",
+            "full"   : "sinnoh\\cynthia",
+            "change" : "sinnoh\\cynthia",
+            "read"   : "sinnoh\\cynthia",
+            "deny"   : "kanto\\ash" 
+          }
+        }
+      },
+      "dc04": {
+        "hostname": "Ditto",
+        "type": "dc",
+        "local_admin_password": "JmGQxK70HqC5%*",
+        "domain": "pokemon.local",
+        "path": "DC=pokemon,DC=local",
+        "local_groups": {
+          "Administrators": [
+            "pokemon\\DITTO"
+          ]
+        },
+        "vulns": ["disable_firewall"],
+        "scripts": []
+      }
+    },
+    "domains": {
+      "pokemon.local": {
+        "dc": "dc04",
+        "domain_password": "JmGQxK70HqC5%*",
+        "netbios_name": "pokemon",
+        "forest_root": true,
+        "groups": {
+          "Enterprise Admins": {
+            "managed_by": "cynthia",
+            "path": "CN=Users,DC=pokemon,DC=local"
+          },
+          "ForestCrossDomain": {
+            "managed_by": "gary",
+            "path": "CN=Users,DC=pokemon,DC=local"
+          }
+        },
+        "acls": {},
+        "users": {
+          "DITTO": {
+            "firstname": "DITTO",
+            "surname": "C",
+            "password": "G4rch0Mp_OP_lmao!!",
+            "description": "Pokemon Master",
+            "groups": [
+              "Domain Admins",
+              "Protected Users",
+              "Enterprise Admins"
+            ],
+            "path": "CN=Users,DC=pokemon,DC=local"
+          }          
+        }
+      },
+      "sinnoh.pokemon.local": {
+        "dc": "dc03",
+        "domain_password": "eqZ#c$KR2TkZpZ",
+        "netbios_name": "sinnoh",
+        "groups": {
+          "global": {
+            "elitefour": {
+              "managed_by": "cynthia",
+              "path": "CN=Users,DC=sinnoh,DC=pokemon,DC=local"
+            },
+            "gymleaders": {
+              "managed_by": "cynthia",
+              "path": "CN=Users,DC=sinnoh,DC=pokemon,DC=local"
+            }
+          }
+        },
+        "acls": {
+          "anonymous_rpc2": {
+            "for": "hoenn\\steven",
+            "to": "DC=sinnoh,DC=pokemon,DC=local",
+            "right": "GenericExecute",
+            "inheritance": "All"
+          }
+        },
+        "users": {
+          "cynthia": {
+            "firstname": "Cynthia",
+            "surname": "C",
+            "password": "G4rch0Mp_OP_lmao!!",
+            "description": "Pokemon Master",
+            "groups": [
+              "Domain Admins"
+            ],
+            "path": "CN=Users,DC=sinnoh,DC=pokemon,DC=local"
+          },
+          "cyrus": {
+            "firstname": "Cyrus",
+            "surname": "C",
+            "password": "D1algaisMine!!",
+            "description": "Team Galactic Boss",
+            "groups": [],
+            "path": "CN=Users,DC=sinnoh,DC=pokemon,DC=local"
+          },
+          "dawn": {
+            "firstname": "Dawn",
+            "surname": "D",
+            "password": "Bubb13_beam",
+            "description": "Pokemon Trainer",
+            "groups": [],
+            "path": "CN=Users,DC=sinnoh,DC=pokemon,DC=local"
+          },
+          "lucas": {
+            "firstname": "Lucas",
+            "surname": "L",
+            "password": "P1p1up_1s_B4d99",
+            "description": "Team Galactic Boss",
+            "groups": [],
+            "path": "CN=Users,DC=sinnoh,DC=pokemon,DC=local"
+          }
+        }
+      },
+      "kanto.pokemon.local": {
+        "dc": "dc01",
+        "domain_password": "8dCT-DJjgScp",
+        "netbios_name": "kanto",
+        "groups": {
+          "global": {
+            "elitefour": {
+              "managed_by": "gary",
+              "path": "CN=Users,DC=kanto,DC=pokemon,DC=local"
+            },
+            "gymleaders": {
+              "managed_by": "gary",
+              "path": "CN=Users,DC=kanto,DC=pokemon,DC=local"
+            },
+            "ViridianForestCrossDomain": {
+              "managed_by": "gary",
+              "path": "CN=Users,DC=kanto,DC=pokemon,DC=local"
+            }
+          }
+        },
+        "users": {
+          "ash": {
+            "firstname": "Ash",
+            "surname": "Ketchum",
+            "password": "Pikachu!1",
+            "description": "Pokemon Master",
+            "groups": [],
+            "path": "CN=Users,DC=kanto,DC=pokemon,DC=local"
+          },
+          "misty": {
+            "firstname": "Misty",
+            "surname": "C",
+            "password": "Wat3rP0k3monAre#1",
+            "description": "Cerulean City Gym Leader",
+            "groups": [
+              "elitefour",
+              "gymleaders"
+            ],
+            "path": "CN=Users,DC=kanto,DC=pokemon,DC=local"
+          },
+          "brock": {
+            "firstname": "Brock",
+            "surname": "Harrison",
+            "password": "nurs3_j0y<3",
+            "description": "Pokemon Trainer",
+            "groups": [],
+            "path": "CN=Users,DC=kanto,DC=pokemon,DC=local"
+          },
+          "gary": {
+            "firstname": "Gary",
+            "surname": "Oak",
+            "password": "mast3rba11z123!",
+            "description": "Domain Champion",
+            "groups": [
+              "Domain Admins"
+            ],
+            "path": "CN=Users,DC=kanto,DC=pokemon,DC=local"
+          },
+          "ViridianForest": {
+            "firstname": "Viridian",
+            "surname": "Forest",
+            "password": "floatlikeaButterfr33!",
+            "description": "Service Account",
+            "groups": [
+              "ViridianForestCrossDomain"
+            ],
+            "path": "CN=Users,DC=kanto,DC=pokemon,DC=local"
+          }
+        },
+        "multi_domain_groups_member":{
+
+        },
+        "acls" : {
+          "anonymous_rpc": {
+            "for": "NT AUTHORITY\\ANONYMOUS LOGON",
+            "to": "DC=kanto,DC=pokemon,DC=local",
+            "right": "ReadProperty",
+            "inheritance": "All"
+          },
+          "GenericWrite_on_user_Admin" : {"for": "kanto\\ash", "to": "CN=Domain Admins,CN=Users,DC=kanto,DC=pokemon,DC=local", "right": "GenericWrite", "inheritance": "None"}
+        }
+      },
+      "hoenn.pokemon.local": {
+        "dc": "dc02",
+        "domain_password": "NgkPP5$Zpu&f2s",
+        "netbios_name": "hoenn",
+        "groups": {
+          "global": {
+            "elitefour": {
+              "managed_by": "steven",
+              "path": "CN=Users,DC=hoenn,DC=pokemon,DC=local"
+            },
+            "gymleaders": {
+              "managed_by": "steven",
+              "path": "CN=Users,DC=hoenn,DC=pokemon,DC=local"
+            }
+          },
+          "domainlocal": {
+            "ViridianForestAccess": {
+              "path": "CN=Users,DC=hoenn,DC=pokemon,DC=local",
+              "description": "Limited access group for Wally share",
+              "managed_by": "wally"
+            }
+          }
+        },
+        "multi_domain_groups_member": {
+          "ViridianForestAccess": [
+            "kanto\\ViridianForest",
+            "hoenn\\wally"
+          ],
+          "Remote Desktop Users": [
+            "kanto\\ViridianForest"
+          ]
+        },
+
+        "users": {
+          "steven": {
+            "firstname": "Steven",
+            "surname": "Stone",
+            "password": "@aron2Kawaii@",
+            "description": "Pokemon Master",
+            "groups": [
+              "Domain Admins"
+            ],
+            "path": "CN=Users,DC=hoenn,DC=pokemon,DC=local"
+          },
+          "wally": {
+            "firstname": "Wally",
+            "surname": "W",
+            "password": "RaltsRulez1!",
+            "description": "Pokemon Master",
+            "groups": [],
+            "path": "CN=Users,DC=hoenn,DC=pokemon,DC=local"
+          },
+          "Archie": {
+            "firstname": "SVC_archie",
+            "surname": "a",
+            "password": "#1pokemonfan",
+            "description": "Service Account",
+            "groups": [
+              "Domain Admins"
+            ],
+            "path": "CN=Users,DC=hoenn,DC=pokemon,DC=local",
+            "spns": [
+              "hoenn/svc.archie"
+            ]
+          },
+          "Maxie": {
+            "firstname": "SVC_maxie",
+            "surname": "m",
+            "password": "#10pokemonmaster",
+            "description": "Service Account",
+            "groups": [
+              "Domain Admins"
+            ],
+            "path": "CN=Users,DC=hoenn,DC=pokemon,DC=local",
+            "spns": [
+              "hoenn/svc.maxie"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

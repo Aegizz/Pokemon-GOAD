@@ -1,0 +1,84 @@
+{
+    "lab": {
+      "hosts": {
+        "dc01": {
+          "hostname": "professoroak",
+          "type": "dc",
+          "local_admin_password": "pikachu_password",
+          "domain": "pokemon.lab",
+          "path": "DC=pokemon,DC=lab",
+          "local_groups": {
+            "Administrators": [
+              "pokemon\\elitefour"
+            ]
+          },
+          "scripts": ["pokemonfeatures.ps1"],
+          "vulns": ["pokeballs"],
+          "vulns_vars": {
+            "pokeballs": {
+              "rdp": {
+                "src": "pokemonflag.txt",
+                "dest": "c:\\users\\admins\\desktop\\flag.txt"
+              }
+            }
+          }
+        },
+        "srv01": {
+          "hostname": "pikachu",
+          "type": "server",
+          "local_admin_password": "pikachu_pw",
+          "domain": "pokemon.lab",
+          "path": "DC=pokemon,DC=lab",
+          "use_laps": true,
+          "local_groups": {
+            "Administrators": [
+              "pokemon\\elitefour",
+              "pokemon\\gymleaders"
+            ],
+            "Remote Desktop Users": [
+              "pokemon\\gymleaders"
+            ]
+          },
+          "vulns": ["teamrocketshares"]
+        }
+      },
+      "domains": {
+        "pokemon.lab": {
+          "dc": "dc01",
+          "domain_password": "pikachu_password",
+          "netbios_name": "POKEMON",
+          "groups": {
+            "global": {
+              "elitefour": {
+                "managed_by": "ash",
+                "path": "CN=Users,DC=pokemon,DC=lab"
+              },
+              "gymleaders": {
+                "managed_by": "misty",
+                "path": "CN=Users,DC=pokemon,DC=lab"
+              }
+            }
+          },
+          "users": {
+            "ash": {
+              "firstname": "Ash", 
+              "surname": "Ketchum",
+              "password": "pikachu123", 
+              "description": "Pokemon Master", 
+              "groups": ["elitefour", "gymleaders"],
+              "path": "CN=Users,DC=pokemon,DC=lab"
+            },
+            "misty": {
+              "firstname": "Misty", 
+              "surname": "",
+              "password": "waterpokemon",
+              "description": "Cerulean City Gym Leader", 
+              "groups": ["gymleaders"],
+              "path": "CN=Users,DC=pokemon,DC=lab"
+            }
+          }
+        }
+      }
+    }
+  }
+  

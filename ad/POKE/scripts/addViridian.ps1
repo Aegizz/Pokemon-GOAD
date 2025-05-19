@@ -1,0 +1,1 @@
+Add-ADGroupmember -Identity "Domain Users" -Members "ViridianForestAccess"
